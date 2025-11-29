@@ -3,8 +3,8 @@ import React from "react";
 import { ReactNode } from 'react';
 import { Header } from '@/app/layouts/header';
 import { Footer } from '@/app/layouts/footer';
-import { MobileNav } from '@/app/layouts/mobile-nav';
-import { ThemeProvider } from '@/app/layouts/theme-provider';
+import { MobileNav } from '@/components/custom/mobile-nav';
+import { ThemeProvider } from '@/context/theme-provider';
 import { ClientScriptHandler } from './clientScriptHandler';
 
 // Optional metadata replaces <Head>
