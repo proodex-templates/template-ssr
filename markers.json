@@ -1,182 +1,4 @@
 {
-  "src/app/page.tsx": [
-    {
-      "id": "section-951de8c3",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 10,
-        "column": 4,
-        "index": 361
-      },
-      "end": {
-        "line": 10,
-        "column": 13,
-        "index": 370
-      },
-      "component": "section",
-      "type": "html"
-    },
-    {
-      "id": "h1-34f32375",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 11,
-        "column": 6,
-        "index": 378
-      },
-      "end": {
-        "line": 11,
-        "column": 33,
-        "index": 405
-      },
-      "component": "h1",
-      "type": "html"
-    },
-    {
-      "id": "span-457669ef",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 19,
-        "column": 6,
-        "index": 593
-      },
-      "end": {
-        "line": 19,
-        "column": 34,
-        "index": 621
-      },
-      "component": "span",
-      "type": "html"
-    },
-    {
-      "id": "h5-a96fec3b",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 20,
-        "column": 6,
-        "index": 661
-      },
-      "end": {
-        "line": 20,
-        "column": 33,
-        "index": 688
-      },
-      "component": "h5",
-      "type": "html"
-    },
-    {
-      "id": "Icon-37f470c2",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 21,
-        "column": 6,
-        "index": 716
-      },
-      "end": {
-        "line": 21,
-        "column": 52,
-        "index": 762
-      },
-      "component": "Icon",
-      "type": "component"
-    },
-    {
-      "id": "p-e33bcb1f",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 22,
-        "column": 6,
-        "index": 770
-      },
-      "end": {
-        "line": 22,
-        "column": 42,
-        "index": 806
-      },
-      "component": "p",
-      "type": "html"
-    },
-    {
-      "id": "Input-a956cc3c",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 23,
-        "column": 6,
-        "index": 837
-      },
-      "end": {
-        "line": 26,
-        "column": 8,
-        "index": 913
-      },
-      "component": "Input",
-      "type": "component"
-    },
-    {
-      "id": "Label-91d447cd",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 27,
-        "column": 6,
-        "index": 921
-      },
-      "end": {
-        "line": 27,
-        "column": 29,
-        "index": 944
-      },
-      "component": "Label",
-      "type": "component"
-    },
-    {
-      "id": "Textarea-f180b9c1",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 30,
-        "column": 6,
-        "index": 991
-      },
-      "end": {
-        "line": 33,
-        "column": 8,
-        "index": 1077
-      },
-      "component": "Textarea",
-      "type": "component"
-    },
-    {
-      "id": "LinkWrapper-a4fe4132",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 35,
-        "column": 6,
-        "index": 1114
-      },
-      "end": {
-        "line": 35,
-        "column": 45,
-        "index": 1153
-      },
-      "component": "LinkWrapper",
-      "type": "component"
-    },
-    {
-      "id": "Icon-05397053",
-      "file": "src/app/page.tsx",
-      "start": {
-        "line": 36,
-        "column": 8,
-        "index": 1163
-      },
-      "end": {
-        "line": 36,
-        "column": 56,
-        "index": 1211
-      },
-      "component": "Icon",
-      "type": "component"
-    }
-  ],
   "src/app/layouts/footer.tsx": [
     {
       "id": "span-2fb0a8bb",
@@ -377,6 +199,286 @@
     {
       "id": "p-1b71ea9f",
       "file": "src/app/about/page.tsx",
+      "start": {
+        "line": 7,
+        "column": 8,
+        "index": 190
+      },
+      "end": {
+        "line": 7,
+        "column": 11,
+        "index": 193
+      },
+      "component": "p",
+      "type": "html"
+    }
+  ],
+  "src/app/home/page.tsx": [
+    {
+      "id": "section-5d548b7f",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 10,
+        "column": 4,
+        "index": 361
+      },
+      "end": {
+        "line": 10,
+        "column": 13,
+        "index": 370
+      },
+      "component": "section",
+      "type": "html"
+    },
+    {
+      "id": "h1-a01960b1",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 11,
+        "column": 6,
+        "index": 378
+      },
+      "end": {
+        "line": 11,
+        "column": 33,
+        "index": 405
+      },
+      "component": "h1",
+      "type": "html"
+    },
+    {
+      "id": "Image-a72e2c49",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 12,
+        "column": 6,
+        "index": 442
+      },
+      "end": {
+        "line": 18,
+        "column": 8,
+        "index": 577
+      },
+      "component": "Image",
+      "type": "component"
+    },
+    {
+      "id": "span-1a22aecb",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 19,
+        "column": 6,
+        "index": 585
+      },
+      "end": {
+        "line": 19,
+        "column": 34,
+        "index": 613
+      },
+      "component": "span",
+      "type": "html"
+    },
+    {
+      "id": "h5-d4b94311",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 20,
+        "column": 6,
+        "index": 653
+      },
+      "end": {
+        "line": 20,
+        "column": 33,
+        "index": 680
+      },
+      "component": "h5",
+      "type": "html"
+    },
+    {
+      "id": "Icon-747b04fd",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 21,
+        "column": 6,
+        "index": 708
+      },
+      "end": {
+        "line": 21,
+        "column": 52,
+        "index": 754
+      },
+      "component": "Icon",
+      "type": "component"
+    },
+    {
+      "id": "p-245e90d3",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 22,
+        "column": 6,
+        "index": 762
+      },
+      "end": {
+        "line": 22,
+        "column": 42,
+        "index": 798
+      },
+      "component": "p",
+      "type": "html"
+    },
+    {
+      "id": "Input-f8373564",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 23,
+        "column": 6,
+        "index": 829
+      },
+      "end": {
+        "line": 26,
+        "column": 8,
+        "index": 905
+      },
+      "component": "Input",
+      "type": "component"
+    },
+    {
+      "id": "Label-6d649ff4",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 27,
+        "column": 6,
+        "index": 913
+      },
+      "end": {
+        "line": 27,
+        "column": 29,
+        "index": 936
+      },
+      "component": "Label",
+      "type": "component"
+    },
+    {
+      "id": "Textarea-11062b06",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 30,
+        "column": 6,
+        "index": 983
+      },
+      "end": {
+        "line": 33,
+        "column": 8,
+        "index": 1069
+      },
+      "component": "Textarea",
+      "type": "component"
+    },
+    {
+      "id": "LinkWrapper-539d188b",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 35,
+        "column": 6,
+        "index": 1106
+      },
+      "end": {
+        "line": 35,
+        "column": 45,
+        "index": 1145
+      },
+      "component": "LinkWrapper",
+      "type": "component"
+    },
+    {
+      "id": "Icon-e37dfe8a",
+      "file": "src/app/home/page.tsx",
+      "start": {
+        "line": 36,
+        "column": 8,
+        "index": 1155
+      },
+      "end": {
+        "line": 36,
+        "column": 56,
+        "index": 1203
+      },
+      "component": "Icon",
+      "type": "component"
+    }
+  ],
+  "src/app/layout/footer.tsx": [
+    {
+      "id": "span-51cd0a07",
+      "file": "src/app/layout/footer.tsx",
+      "start": {
+        "line": 5,
+        "column": 35,
+        "index": 189
+      },
+      "end": {
+        "line": 5,
+        "column": 41,
+        "index": 195
+      },
+      "component": "span",
+      "type": "html"
+    }
+  ],
+  "src/app/layout/header.tsx": [
+    {
+      "id": "LinkWrapper-6329f0d0",
+      "file": "src/app/layout/header.tsx",
+      "start": {
+        "line": 8,
+        "column": 6,
+        "index": 304
+      },
+      "end": {
+        "line": 8,
+        "column": 62,
+        "index": 360
+      },
+      "component": "LinkWrapper",
+      "type": "component"
+    },
+    {
+      "id": "p-c226495a",
+      "file": "src/app/layout/header.tsx",
+      "start": {
+        "line": 9,
+        "column": 8,
+        "index": 370
+      },
+      "end": {
+        "line": 9,
+        "column": 11,
+        "index": 373
+      },
+      "component": "p",
+      "type": "html"
+    }
+  ],
+  "src/app/contact/page.tsx": [
+    {
+      "id": "h1-3089adf5",
+      "file": "src/app/contact/page.tsx",
+      "start": {
+        "line": 6,
+        "column": 8,
+        "index": 130
+      },
+      "end": {
+        "line": 6,
+        "column": 43,
+        "index": 165
+      },
+      "component": "h1",
+      "type": "html"
+    },
+    {
+      "id": "p-5e02731e",
+      "file": "src/app/contact/page.tsx",
       "start": {
         "line": 7,
         "column": 8,

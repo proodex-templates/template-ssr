@@ -1,11 +1,9 @@
 import '@/styles/globals.css';
-import React from "react";
 import { ReactNode } from 'react';
-import { Header } from '@/app/layouts/header';
-import { Footer } from '@/app/layouts/footer';
-import { Navigation } from '@/components/custom/navigation';
+import { Header } from '@/app/layout/header';
+import { Footer } from '@/app/layout/footer';
 import { ThemeProvider } from '@/context/theme-provider';
-import { ClientScriptHandler } from './client-script-handler';
+import { ClientScriptHandler } from '@/client-script-handler';
 
 // Optional metadata replaces <Head>
 export const metadata = {
@@ -23,7 +21,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
           <div className="flex flex-col min-h-screen">
             <Header />
-            <Navigation />
             <main className="flex-grow">
               <ClientScriptHandler />
               {children}
