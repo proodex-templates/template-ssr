@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Install all dependencies including dev
-RUN npm install --include=dev
+RUN npm install --include=dev --legacy-peer-deps
 
 # DO NOT copy the rest of the files; they will be mounted at runtime
 # COPY . .
