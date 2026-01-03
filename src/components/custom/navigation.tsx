@@ -26,7 +26,7 @@ export function Navigation() {
             href={link.href} 
             className="text-sm font-medium hover:text-blue-600 transition-colors"
           >
-            {link.name}
+            <p>{link.name}</p>
           </Link>
         ))}
       </div>
@@ -49,7 +49,7 @@ export function Navigation() {
                 onClick={toggleMenu}
                 className="text-lg font-medium border-b border-gray-100 dark:border-gray-800 pb-2"
               >
-                {link.name}
+                <p>{link.name}</p>
               </Link>
             ))}
           </div>
