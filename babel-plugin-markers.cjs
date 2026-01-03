@@ -1,17 +1,21 @@
-// babel-plugin-markers.cjs
-const fs = require("fs");
 const path = require("path");
-const crypto = require("crypto");
 
 const CONFIG = {
-  outputPath: path.resolve(process.cwd(), "markers.json"),
   allowedElements: [
     "h1","h2","h3","h4","h5","h6",
     "p","span","section","Textarea","Label","Input",
     "Icon","Image","LinkWrapper"
   ],
-  excludePatterns: [/node_modules/, /\.next/, /out/, /src[\\/]components/],
-  includeRoots: [/^src[\\/]app\//]
+  excludedFolders: [
+    "components/ui", 
+    "utility", 
+    "lib", 
+    "styles", 
+    "hooks", 
+    "context", 
+    "config", 
+    "assets"
+  ]
 };
 
 module.exports = function (babel) {
@@ -19,83 +23,81 @@ module.exports = function (babel) {
 
   return {
     name: "babel-plugin-markers",
-    pre(file) {
-      // initialise per-file storage
-      this.markers = [];
-      this.filename = file.opts.filename;
-    },
-
     visitor: {
-      JSXOpeningElement(nodePath) {
-  const loc = nodePath.node.loc;
-  if (!loc || !this.filename) return;
+      JSXOpeningElement(nodePath, state) {
+        const filename = state.file.opts.filename;
+        if (!filename) {
+          // Log if filename is missing entirely
+          console.log("[DEBUG] JSXOpeningElement: filename is undefined", { nodePath: nodePath.node });
+          return;
+        }
 
-  const rel = path.relative(process.cwd(), this.filename).replace(/\\/g, "/");
+        // --- 1. PATH VALIDATION & FILTERING ---
+        const normalizedPath = filename.replace(/\\/g, "/");
 
-  let name = "Unknown";
-  const n = nodePath.node.name;
-  if (t.isJSXIdentifier(n)) name = n.name;
-  else if (t.isJSXMemberExpression(n)) name = n.object.name ?? "Unknown";
+        // Log initial path and checks
+        // console.log(`[DEBUG] Processing: ${normalizedPath}`);
 
-  if (!CONFIG.allowedElements.includes(name)) return;
+        if (!normalizedPath.includes("/src/")) {
+          // console.log(`[DEBUG] Skipping (not in src): ${normalizedPath}`);
+          return;
+        }
 
-  const type = /^[A-Z]/.test(name) ? "component" : "html";
+        const srcIndex = normalizedPath.indexOf("/src/");
+        if (srcIndex === -1) return; // Should not happen if includes("/src/") passed
 
-  const hash = crypto.createHash("md5")
-    .update(`${rel}:${loc.start.line}:${loc.start.column}`)
-    .digest("hex").slice(0, 8);
-  const marker = `${name}-${hash}`;
+        const relativeToSrc = normalizedPath.substring(srcIndex + 5); // +5 for "/src/"
 
-  const idx = nodePath.node.attributes.findIndex(
-    a => t.isJSXAttribute(a) && a.name.name === "data-marker"
-  );
+        const isExcluded = CONFIG.excludedFolders.some(folder => 
+          relativeToSrc.startsWith(`${folder}/`) || relativeToSrc === folder
+        );
 
-  let existing = [];
-  if (idx >= 0) {
-    const val = nodePath.node.attributes[idx].value?.value ?? "";
-    existing = val.split(";").map(s => s.trim()).filter(Boolean);
-  }
-  if (!existing.includes(marker)) existing.push(marker);
-  const merged = existing.join(";");
+        if (isExcluded) {
+          // console.log(`[DEBUG] Skipping (excluded folder): ${relativeToSrc}`);
+          return;
+        }
 
-  if (idx >= 0) {
-    nodePath.node.attributes[idx].value = t.stringLiteral(merged);
-  } else {
-    nodePath.node.attributes.push(
-      t.jsxAttribute(t.jsxIdentifier("data-marker"), t.stringLiteral(merged))
-    );
-  }
+        // --- 2. ELEMENT IDENTIFICATION ---
+        let name = "Unknown";
+        const n = nodePath.node.name;
+        if (t.isJSXIdentifier(n)) name = n.name;
+        else if (t.isJSXMemberExpression(n)) name = n.object.name ?? "Unknown";
 
-  this.markers.push({
-    id: marker,
-    file: rel,
-    start: loc.start,
-    end: loc.end,
-    component: name,
-    type
-  });
-  }
-  },
+        if (!CONFIG.allowedElements.includes(name)) {
+          // console.log(`[DEBUG] Skipping (not allowed element): ${name} in ${relativeToSrc}`);
+          return;
+        }
+        
+        const loc = nodePath.node.loc;
+        if (!loc) {
+          console.error(`[DEBUG] Error: No location found for ${name} in ${relativeToSrc}`);
+          return;
+        }
 
-    post() {
-      if (!this.filename) return;
-      const rel = path.relative(process.cwd(), this.filename).replace(/\\/g, "/");
+        // --- 3. ENCODE ID ---
+        const rawId = `${relativeToSrc}|${loc.start.line}|${loc.end.line}`;
+        const encoded = Buffer.from(rawId).toString('base64').replace(/=/g, "");
+        const markerValue = `${name}-${encoded}`;
 
-      // ---- write JSON (atomic per-file) ----
-      let all = {};
-      if (fs.existsSync(CONFIG.outputPath)) {
-        try { all = JSON.parse(fs.readFileSync(CONFIG.outputPath, "utf8")); }
-        catch (_) {}
-      }
+        // --- Log BEFORE injecting ---
+        console.log(`[DEBUG] MARKER FOUND: ${markerValue}`);
+        console.log(`[DEBUG]   File: ${relativeToSrc}`);
+        console.log(`[DEBUG]   Element: ${name}`);
+        console.log(`[DEBUG]   Location: Line ${loc.start.line} - ${loc.end.line}`);
 
-      if (this.markers.length) all[rel] = this.markers;
-      else delete all[rel];
 
-      try {
-        fs.writeFileSync(CONFIG.outputPath, JSON.stringify(all, null, 2), "utf8");
-        console.log(`[babel-markers] ${rel} → ${this.markers.length} marker(s)`);
-      } catch (e) {
-        console.error("[babel-markers] write error:", e.message);
+        // --- 4. INJECT ATTRIBUTE ---
+        const idx = nodePath.node.attributes.findIndex(
+          a => t.isJSXAttribute(a) && a.name.name === "data-marker"
+        );
+
+        if (idx >= 0) {
+          nodePath.node.attributes[idx].value = t.stringLiteral(markerValue);
+        } else {
+          nodePath.node.attributes.push(
+            t.jsxAttribute(t.jsxIdentifier("data-marker"), t.stringLiteral(markerValue))
+          );
+        }
       }
     }
   };

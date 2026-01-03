@@ -1,30 +1,36 @@
-const { resolve } = require("path");
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 1. REMOVED swcMinify: true (it is now the default and the key is deprecated)
-
-  webpack(config) {
+  // Keep your other config options here
+  
+  webpack: (config, { isServer }) => {
+    // Add the Babel loader rule
     config.module.rules.push({
-      test: /\.(tsx|jsx)$/,
-      // Only apply babel to your app code to keep builds fast
-      include: [resolve(__dirname, "src/app")],
-      use: {
-        loader: "babel-loader",
-        options: {
-          cacheDirectory: true,
-          presets: [
-            ["@babel/preset-react", { runtime: "automatic" }],
-            ["@babel/preset-typescript", { isTSX: true, allExtensions: true }]
-          ],
-          plugins: [
-            resolve(__dirname, "babel-plugin-markers.cjs")
-          ]
-        }
-      }
+      // Match JS, JSX, TS, and TSX files
+      test: /\.(js|mjs|jsx|ts|tsx)$/,
+      // Only apply this to your src folder to keep builds fast
+      include: [path.join(__dirname, "src")],
+      use: [
+        {
+          loader: "babel-loader",
+          options: {
+            // Using the 'next/babel' preset ensures compatibility with Next.js features
+            presets: ["next/babel"],
+            plugins: [
+              // Point this to the path where you saved your babel file
+              [require.resolve("./babel-plugin-markers.cjs")]
+            ],
+            // Disable looking for local .babelrc files to keep SWC active
+            babelrc: false,
+            configFile: false,
+          },
+        },
+      ],
     });
+
     return config;
-  }
+  },
 };
 
+// You'll need to import path at the top of next.config.js
+const path = require("path");
 module.exports = nextConfig;
